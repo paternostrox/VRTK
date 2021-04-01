@@ -38,4 +38,15 @@ public static class PPPUtil
             angle += 360f;
         return angle;
     }
+
+    // Only goes one level deep (not sure)
+    public static Transform[] GetAllChildren(Transform parent)
+    {
+        List<Transform> allChildren = new List<Transform>();
+        foreach(Transform child in parent)
+        {
+            allChildren.Add(child);
+        }
+        return allChildren.ToArray();
+    }
 }

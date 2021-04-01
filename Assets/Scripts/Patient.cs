@@ -8,6 +8,8 @@ public class Patient : MonoBehaviour
     [SerializeField]
     TreatmentDatabase treatmentDatabase;
 
+    Treatment currentTreatment;
+
     Rigidbody rb;
     float moveSpeed;
     DialogueBox dialogueBox;
@@ -19,12 +21,14 @@ public class Patient : MonoBehaviour
 
     public void RequestTreatment()
     {
-        dialogueBox.Display();
+        currentTreatment = treatmentDatabase.GetRandomTreatment();
+        dialogueBox.Display(currentTreatment.GetRequestMessage());
     }
 
     public void GoAway()
     {
-
+        dialogueBox.Display(currentTreatment.GetPostMessage());
+        //FollowPath(path);
     }
 
     public void FollowPath(Transform[] path)
