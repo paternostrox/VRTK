@@ -10,11 +10,11 @@ public class TreatmentStation
 
     [SerializeField] [OnValueChanged("SetEntrancePath")] [AllowNesting]
     Transform EntranceToStationPath; // Parent
-    public Transform[] entranceToStationPath; // Real path
+    [ReadOnly] public Transform[] entranceToStationPath; // Real path
 
     [SerializeField] [OnValueChanged("SetExitPath")] [AllowNesting]
     Transform StationToExitPath; // Parent
-    [HideInInspector] public Transform[] stationToExitPath; // Real path
+    [ReadOnly] public Transform[] stationToExitPath; // Real path
 
     void SetEntrancePath()
     {
