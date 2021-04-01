@@ -8,7 +8,7 @@ public class PathManager : MonoBehaviour
     TreatmentStation[] treatmentStations;
 
     [SerializeField]
-    Transform entranceToWaitingZonePath;
+    TPath spawnToWaitingZone;
 
     public int TryGetStation(out Transform[] path)
     {
@@ -16,7 +16,7 @@ public class PathManager : MonoBehaviour
         {
             if(!treatmentStations[i].isOccupied)
             {
-                path = treatmentStations[i].entranceToStationPath;
+                path = treatmentStations[i].spawnToStation.path;
                 treatmentStations[i].isOccupied = true;
                 return i; // returns station index
             }
@@ -25,9 +25,14 @@ public class PathManager : MonoBehaviour
         return 0;
     }
 
+    public Transform[] GetPathToWaitingZone()
+    {
+        return spawnToWaitingZone.path;
+    }
+
     public Transform[] GetPathToExit(int stationIndex)
     {
         treatmentStations[stationIndex].isOccupied = false;
-        return null;// path
+        return treatmentStations[stationIndex].stationToExit.path;
     }
 }
