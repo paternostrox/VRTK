@@ -26,10 +26,14 @@ public class PatientManager : MonoBehaviour
     {
         foreach(Patient p in patientList)
         {
-            if(p.enabled)
+            if(!p.enabled)
             {
-                
+                p.Initialize(); // not sure if this will run (GO disabled)
+                return;
             }
         }
+        Patient p = Instantiate<GameObject>(patientPrefab).GetComponent<Patient>();
+        patientList.Add(p);
+        p.Initialize();
     }
 }

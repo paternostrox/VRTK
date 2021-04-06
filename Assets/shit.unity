@@ -38838,11 +38838,23 @@ MonoBehaviour:
   treatmentStations:
   - isOccupied: 0
     station: {fileID: 0}
-    EntranceToStationPath: {fileID: 0}
-    entranceToStationPath: []
-    StationToExitPath: {fileID: 0}
-    stationToExitPath: []
-  entranceToWaitingZonePath: {fileID: 0}
+    spawnToStation:
+      pathParent: {fileID: 0}
+      path: []
+    stationToExit:
+      pathParent: {fileID: 0}
+      path: []
+  - isOccupied: 0
+    station: {fileID: 0}
+    spawnToStation:
+      pathParent: {fileID: 0}
+      path: []
+    stationToExit:
+      pathParent: {fileID: 0}
+      path: []
+  spawnToWaitingZone:
+    pathParent: {fileID: 0}
+    path: []
 --- !u!4 &1045705677
 Transform:
   m_ObjectHideFlags: 0

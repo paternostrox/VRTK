@@ -1,22 +1,69 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Patient : MonoBehaviour
 {
+    Rigidbody rb;
+    float moveSpeed;
+    DialogueBox dialogueBox;
+
     [SerializeField]
     TreatmentDatabase treatmentDatabase;
 
     Treatment currentTreatment;
 
-    Rigidbody rb;
-    float moveSpeed;
-    DialogueBox dialogueBox;
+    Transform[] currentPath;
+
+    Queue<Action> tasks;
+
+    int currentStation = -1;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    public void Initialize()
+    {
+        // Change visuals
+
+        // Get tasks
+        tasks = new Queue<Action>();
+
+        bool hasVacancy = PathManager.main.HasVacancy();
+        if (!hasVacancy)
+        {
+            PathManager.main.WaitInQueue(this);
+            tasks.Enqueue(new Action(GoToWait));
+            tasks.Enqueue(new Action(WanderRandomly));
+        }
+        tasks.Enqueue(new Action(TryGoToStation));
+        tasks.Enqueue(new Action(RequestTreatment));
+        tasks.Enqueue(new Action(GoToExit));
+
+        PerformNextTask();
+    }
+
+    public void PerformNextTask()
+    {
+        Action a = tasks.Dequeue();
+        a.Invoke();
+    }
+
+    public void GoToWait()
+    {
+        currentPath = PathManager.main.GetPathToWaitingZone();
+        FollowPath();
+    }
+
+    public void TryGoToStation()
+    {
+        currentStation = PathManager.main.TryGetStation(out currentPath);
+        if (currentStation != -1)
+            FollowPath();
     }
 
     public void RequestTreatment()
@@ -25,15 +72,27 @@ public class Patient : MonoBehaviour
         dialogueBox.Display(currentTreatment.GetRequestMessage());
     }
 
-    public void GoAway()
+    public void ReceiveTreatment()
     {
-        dialogueBox.Display(currentTreatment.GetPostMessage());
-        //FollowPath(path);
+        PerformNextTask();
     }
 
-    public void FollowPath(Transform[] path)
+    public void GoToExit()
     {
-        StartCoroutine(RunFollowPath(path));
+        PathManager.main.RemoveFromWait(this);
+        dialogueBox.Display(currentTreatment.GetPostMessage());
+        currentPath = PathManager.main.GetPathToExit(currentStation);
+        FollowPath();
+    }
+
+    public void WanderRandomly()
+    {
+
+    }
+
+    public void FollowPath()
+    {
+        StartCoroutine(RunFollowPath(currentPath));
     }
 
     IEnumerator RunWanderRandomly()
@@ -54,6 +113,7 @@ public class Patient : MonoBehaviour
                 i++;
             yield return null;
         }
+        PerformNextTask();
     }
 
     public void StopRB()
