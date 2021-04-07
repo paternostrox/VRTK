@@ -19,7 +19,7 @@ public class Patient : MonoBehaviour
 
     Treatment currentTreatment;
 
-    Transform[] currentPath;
+    Vector3[] currentPath;
 
     Queue<Action> tasks;
 
@@ -112,11 +112,11 @@ public class Patient : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator RunFollowPath(Transform[] path)
+    IEnumerator RunFollowPath(Vector3[] path)
     {
         for(int i =0; i < path.Length; )
         {
-            Vector3 toTarget = PPPUtil.ToTargetVecXZ(transform.position, path[i].position);
+            Vector3 toTarget = PPPUtil.ToTargetVecXZ(transform.position, path[i]);
             if (toTarget.magnitude > .05f) {
                 rb.velocity = toTarget.normalized * moveSpeed;
             }

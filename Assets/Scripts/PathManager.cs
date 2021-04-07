@@ -1,16 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PathManager : MonoBehaviour
 {
     public static PathManager main;
 
+    //[SerializeField]
+    //Transform spawnPoint, exitPoint;
+
     [SerializeField]
     TreatmentStation[] treatmentStations;
 
     [SerializeField]
-    Path spawnToWaitingZone;
+    TPath spawnToWaitingZone;
 
     List<Patient> waitQueue = new List<Patient>();
 
@@ -45,13 +50,13 @@ public class PathManager : MonoBehaviour
         return false;
     }
 
-    public int TryGetStation(out Transform[] path)
+    public int TryGetStation(out Vector3[] path)
     {
         for(int i=0;i < treatmentStations.Length; i++)
         {
             if(!treatmentStations[i].isOccupied)
             {
-                path = treatmentStations[i].spawnToStation.path;
+                path = PPPUtil.Transforms2Positions(treatmentStations[i].spawnToStation.path);
                 treatmentStations[i].isOccupied = true;
                 return i; // returns station index
             }
@@ -60,25 +65,26 @@ public class PathManager : MonoBehaviour
         return -1;
     }
 
-    public Transform[] GetPathToWaitingZone()
+    public Vector3[] GetPathToWaitingZone()
     {
         float xPos = Random.Range(waitArea.min.x, waitArea.max.x);
         float zPos = Random.Range(waitArea.min.z, waitArea.max.z);
-        spawnToWaitingZone.path[spawnToWaitingZone.path.Length - 1].position = new Vector3(xPos,0f,zPos);
-        Transform[] copy
-        return spawnToWaitingZone.path; // ADICIONAR PERTURBACAO AQUI
+        Vector3 posInWaitZone = new Vector3(xPos,0f,zPos);
+        spawnToWaitingZone.path[spawnToWaitingZone.path.Length - 1].position = posInWaitZone;
+        Vector3[] path = PPPUtil.Transforms2Positions(spawnToWaitingZone.path);
+        return path;
     }
 
-    public Transform[] GetPathToExit(int stationIndex)
+    public Vector3[] GetPathToExit(int stationIndex)
     {
         if (stationIndex > 0)
         {
             treatmentStations[stationIndex].isOccupied = false;
-            return treatmentStations[stationIndex].stationToExit.path;
+            return PPPUtil.Transforms2Positions(treatmentStations[stationIndex].stationToExit.path);
         }
         else
         {
-            Transform[] exit = { treatmentStations[0].stationToExit.path[treatmentStations[0].stationToExit.path.Length - 1] };
+            Vector3[] exit = { treatmentStations[0].stationToExit.path[treatmentStations[0].stationToExit.path.Length - 1].position };
             return exit;
         }
     }

@@ -8,6 +8,6 @@ public class TreatmentStation
     public bool isOccupied;
     //public Transform station;
 
-    public Path spawnToStation;
-    public Path stationToExit;
+    public TPath spawnToStation;
+    public TPath stationToExit;
 }

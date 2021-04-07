@@ -49,4 +49,13 @@ public static class PPPUtil
         }
         return allChildren.ToArray();
     }
+
+    // Returns array of positions of the given transforms
+    public static Vector3[] Transforms2Positions(Transform[] transforms)
+    {
+        Vector3[] positions = new Vector3[transforms.Length];
+        for (int i = 0; i < positions.Length; i++)
+            positions[i] = transforms[i].position;
+        return positions;
+    }
 }
