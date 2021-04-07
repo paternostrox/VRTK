@@ -6,8 +6,8 @@ using NaughtyAttributes;
 public class TreatmentStation
 {
     public bool isOccupied;
-    public Transform station;
+    //public Transform station;
 
-    public TPath spawnToStation;
-    public TPath stationToExit;
+    public Path spawnToStation;
+    public Path stationToExit;
 }

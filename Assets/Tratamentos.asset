@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581ced3b33e3c0841bf3cc5c65202847, type: 3}
+  m_Name: Tratamentos
+  m_EditorClassIdentifier: 
+  availableTreatments:
+  - id: Vermelho
+    requestMessages:
+    - PRECISO DE VERMELHOOOOO
+    - "ME D\xC1 VERMELHO INFERNO"
+    postMessages:
+    - AGORA POSSO VERMELHOR HAHAHA
+  - id: Verde
+    requestMessages:
+    - Verdeeeeeee :(
+    postMessages:
+    - "Valeu irm\xE3o"
+  - id: Azul
+    requestMessages:
+    - PRECISO DE AZUL, AZUL DA COR DO MAR
+    - "AZUL, DA COR DE SUA M\xC3E AQUELA BALEIA"
+    postMessages:
+    - Obgggg champs ;)

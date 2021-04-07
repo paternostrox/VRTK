@@ -4,7 +4,7 @@ using NaughtyAttributes;
 
 // Represents a path of transforms
 [System.Serializable]
-public class TPath
+public class Path
 {
     [SerializeField]
     [AllowNesting]

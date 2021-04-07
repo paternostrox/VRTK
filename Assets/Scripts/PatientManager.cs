@@ -14,12 +14,24 @@ public class PatientManager : MonoBehaviour
 
     List<Patient> patientList = new List<Patient>();
 
-    private void Start()
+    private void Awake()
     {
         if (main == null)
             main = this;
         else
             throw new System.Exception("There should be only one PatientManager in the scene!");
+
+        StartCoroutine(RunSpawner(2f,12f));
+    }
+
+    IEnumerator RunSpawner(float minInterval, float maxInterval)
+    {
+        for(; ; )
+        {
+            SpawnPatient();
+            float r = Random.Range(minInterval, maxInterval);
+            yield return new WaitForSeconds(r);
+        }
     }
 
     public void SpawnPatient()
@@ -28,12 +40,12 @@ public class PatientManager : MonoBehaviour
         {
             if(!p.enabled)
             {
-                p.Initialize(); // not sure if this will run (GO disabled)
+                p.gameObject.SetActive(true);
                 return;
             }
         }
-        Patient p = Instantiate<GameObject>(patientPrefab).GetComponent<Patient>();
-        patientList.Add(p);
-        p.Initialize();
+        Patient patient = Instantiate<GameObject>(patientPrefab).GetComponent<Patient>();
+        patient.transform.position = spawnPoint.position;
+        patientList.Add(patient);
     }
 }

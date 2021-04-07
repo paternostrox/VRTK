@@ -7,11 +7,15 @@ using UnityEngine;
 public class Patient : MonoBehaviour
 {
     Rigidbody rb;
-    float moveSpeed;
-    DialogueBox dialogueBox;
 
     [SerializeField]
     TreatmentDatabase treatmentDatabase;
+
+    [SerializeField]
+    float moveSpeed;
+
+    [SerializeField]
+    DialogueBox dialogueBox;
 
     Treatment currentTreatment;
 
@@ -21,14 +25,20 @@ public class Patient : MonoBehaviour
 
     int currentStation = -1;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        Initialize();
     }
 
     public void Initialize()
     {
         // Change visuals
+        gameObject.SetActive(true);
 
         // Get tasks
         tasks = new Queue<Action>();
@@ -43,6 +53,7 @@ public class Patient : MonoBehaviour
         tasks.Enqueue(new Action(TryGoToStation));
         tasks.Enqueue(new Action(RequestTreatment));
         tasks.Enqueue(new Action(GoToExit));
+        tasks.Enqueue(new Action(() => gameObject.SetActive(false)));
 
         PerformNextTask();
     }
@@ -106,7 +117,7 @@ public class Patient : MonoBehaviour
         for(int i =0; i < path.Length; )
         {
             Vector3 toTarget = PPPUtil.ToTargetVecXZ(transform.position, path[i].position);
-            if (toTarget.magnitude > .01f) {
+            if (toTarget.magnitude > .05f) {
                 rb.velocity = toTarget.normalized * moveSpeed;
             }
             else

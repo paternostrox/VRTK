@@ -10,11 +10,14 @@ public class PathManager : MonoBehaviour
     TreatmentStation[] treatmentStations;
 
     [SerializeField]
-    TPath spawnToWaitingZone;
+    Path spawnToWaitingZone;
 
     List<Patient> waitQueue = new List<Patient>();
 
-    private void Start()
+    [SerializeField]
+    Bounds waitArea;
+
+    private void Awake()
     {
         if (main == null)
             main = this;
@@ -59,6 +62,10 @@ public class PathManager : MonoBehaviour
 
     public Transform[] GetPathToWaitingZone()
     {
+        float xPos = Random.Range(waitArea.min.x, waitArea.max.x);
+        float zPos = Random.Range(waitArea.min.z, waitArea.max.z);
+        spawnToWaitingZone.path[spawnToWaitingZone.path.Length - 1].position = new Vector3(xPos,0f,zPos);
+        Transform[] copy
         return spawnToWaitingZone.path; // ADICIONAR PERTURBACAO AQUI
     }
 
@@ -74,5 +81,10 @@ public class PathManager : MonoBehaviour
             Transform[] exit = { treatmentStations[0].stationToExit.path[treatmentStations[0].stationToExit.path.Length - 1] };
             return exit;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(waitArea.center,waitArea.size);
     }
 }
