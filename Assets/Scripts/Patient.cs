@@ -10,15 +10,12 @@ public class Patient : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField]
-    TreatmentDatabase treatmentDatabase;
-
-    [SerializeField]
     float moveSpeed;
 
     [SerializeField]
     DialogueBox dialogueBox;
 
-    Treatment currentTreatment;
+    TreatmentPack treatmentPack;
 
     Vector3[] currentPath;
 
@@ -34,6 +31,12 @@ public class Patient : MonoBehaviour
     private void OnEnable()
     {
         Initialize();
+    }
+
+    private void OnDisable()
+    {
+        PatientManager.main.RemoveFromList(this);
+        Destroy(gameObject);
     }
 
     public void Initialize()
@@ -81,20 +84,17 @@ public class Patient : MonoBehaviour
 
     public void RequestTreatment()
     {
-        currentTreatment = treatmentDatabase.GetRandomTreatment();
-        dialogueBox.Display(currentTreatment.GetRequestMessage());
-        Instantiate<GameObject>(currentTreatment.snapZonePrefab, transform);
-    }
-
-    public void ReceiveTreatment()
-    {
-        PerformNextTask();
+        treatmentPack = TreatmentManager.main.GetTreatment();
+        dialogueBox.Display(treatmentPack.data.GetRequestMessage());
+        GameObject g = Instantiate<GameObject>(treatmentPack.rep.snapZone, transform);
+        g.GetComponent<SnapZoneSetter>().Set(treatmentPack.rep.treatmentObj, PerformNextTask); // Perform next task when treatment is received
     }
 
     public void GoToExit()
     {
         PathManager.main.RemoveFromWait(this);
-        dialogueBox.Display(currentTreatment.GetPostMessage());
+        dialogueBox.Display(treatmentPack.data.GetPostMessage());
+        PathManager.main.DeoccupyStation(currentStation);
         currentPath = PathManager.main.GetPathToExit(currentStation);
         FollowPath();
     }
@@ -121,7 +121,7 @@ public class Patient : MonoBehaviour
 
     public void WanderRandomly()
     {
-
+        // IMPLEMENT
     }
 
     IEnumerator RunWanderRandomly()

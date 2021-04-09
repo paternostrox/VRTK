@@ -1988,6 +1988,7 @@ GameObject:
   - component: {fileID: 5911255076023375768}
   - component: {fileID: 6840442913753146655}
   - component: {fileID: 6840442913753146652}
+  - component: {fileID: 929674164690306355}
   m_Layer: 0
   m_Name: RedSnapZone
   m_TagString: Untagged
@@ -2100,7 +2101,19 @@ MonoBehaviour:
       m_Calls: []
   currentIndex: 0
   elements:
-  - {fileID: 0}
+  - {fileID: 8354947752011353315, guid: 7ce90a6204da5c24485fd7f6a7a75313, type: 3}
+--- !u!114 &929674164690306355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911255076023375775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d945e21344e6904e91051b87b23140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5911255076026522255
 GameObject:
   m_ObjectHideFlags: 0

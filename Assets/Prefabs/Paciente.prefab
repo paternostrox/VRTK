@@ -516,6 +516,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2507cc9a37613084db8c4344bb3816d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treatmentDatabase: {fileID: 11400000, guid: 45206022cfd77d1438974b0232a05b4d, type: 2}
-  moveSpeed: 2
+  moveSpeed: 4
   dialogueBox: {fileID: 4726901544744029806}

@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PathManager : MonoBehaviour
+public class PathManager : Singleton<PathManager>
 {
-    public static PathManager main;
-
     //[SerializeField]
     //Transform spawnPoint, exitPoint;
 
@@ -21,14 +19,6 @@ public class PathManager : MonoBehaviour
 
     [SerializeField]
     Bounds waitArea;
-
-    private void Awake()
-    {
-        if (main == null)
-            main = this;
-        else
-            throw new System.Exception("There should be only one PathManager in the scene!");
-    }
 
     public void WaitInQueue(Patient patient)
     {
@@ -63,6 +53,11 @@ public class PathManager : MonoBehaviour
         }
         path = null;
         return -1;
+    }
+
+    public void DeoccupyStation(int stationIndex) 
+    {
+        treatmentStations[stationIndex].isOccupied = false;
     }
 
     public Vector3[] GetPathToWaitingZone()

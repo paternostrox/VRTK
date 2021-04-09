@@ -2250,6 +2250,7 @@ GameObject:
   - component: {fileID: 1805374112581203272}
   - component: {fileID: 1579399570706482012}
   - component: {fileID: 1579399570706482011}
+  - component: {fileID: 2415426571543744974}
   m_Layer: 0
   m_Name: GreenSnapZone
   m_TagString: Untagged
@@ -2363,6 +2364,18 @@ MonoBehaviour:
   currentIndex: 0
   elements:
   - {fileID: 0}
+--- !u!114 &2415426571543744974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805374112581203279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d945e21344e6904e91051b87b23140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1805374112584349791
 GameObject:
   m_ObjectHideFlags: 0

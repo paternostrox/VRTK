@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TreatmentDatabase", menuName = "GameData/TreatmentDatabase")]
 public class TreatmentDatabase : ScriptableObject
 {
-    public Treatment[] availableTreatments;
+    public TreatmentData[] availableTreatments;
 
-    public Treatment GetRandomTreatment()
+    public TreatmentData GetRandomTreatment()
     {
         int index = Random.Range(0, availableTreatments.Length);
         return availableTreatments[index];

@@ -3737,6 +3737,7 @@ GameObject:
   - component: {fileID: 8155959060863364257}
   - component: {fileID: 9063797954873678521}
   - component: {fileID: 9063797954873678522}
+  - component: {fileID: 1747992321422480482}
   m_Layer: 0
   m_Name: BlueSnapZone
   m_TagString: Untagged
@@ -3850,6 +3851,18 @@ MonoBehaviour:
   currentIndex: 0
   elements:
   - {fileID: 0}
+--- !u!114 &1747992321422480482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155959060863364262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d945e21344e6904e91051b87b23140e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8155959060878846520
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,11 +2,9 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Treatment
+public class TreatmentData
 {
     public string id;
-    public GameObject treatmentObj;
-    public GameObject snapZonePrefab;
     public string[] requestMessages;
     public string[] postMessages;
 

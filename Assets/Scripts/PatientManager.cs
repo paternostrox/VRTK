@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatientManager : MonoBehaviour
+public class PatientManager : Singleton<PatientManager>
 {
-    public static PatientManager main;
 
     [SerializeField]
     GameObject patientPrefab;
@@ -14,14 +13,13 @@ public class PatientManager : MonoBehaviour
 
     List<Patient> patientList = new List<Patient>();
 
-    private void Awake()
-    {
-        if (main == null)
-            main = this;
-        else
-            throw new System.Exception("There should be only one PatientManager in the scene!");
+    [SerializeField]
+    float spawnMin, spawnMax;
 
-        StartCoroutine(RunSpawner(8f,30f));
+    protected override void Awake()
+    {
+        base.Awake();
+        StartCoroutine(RunSpawner(spawnMin, spawnMax));
     }
 
     IEnumerator RunSpawner(float minInterval, float maxInterval)
@@ -34,16 +32,13 @@ public class PatientManager : MonoBehaviour
         }
     }
 
+    public void RemoveFromList(Patient patient)
+    {
+        patientList.Remove(patient);
+    }
+
     public void SpawnPatient()
     {
-        foreach(Patient p in patientList)
-        {
-            if(!p.enabled)
-            {
-                p.gameObject.SetActive(true);
-                return;
-            }
-        }
         Patient patient = Instantiate<GameObject>(patientPrefab).GetComponent<Patient>();
         patient.transform.position = spawnPoint.position;
         patientList.Add(patient);

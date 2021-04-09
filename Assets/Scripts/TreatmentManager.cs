@@ -1,16 +1,38 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TreatmentManager : MonoBehaviour
+public class TreatmentManager : Singleton<TreatmentManager>
 {
-    public static TreatmentManager main;
 
     public TreatmentDatabase database;
 
-    public GameObject[] treatmentObjs; // LEFT HERE
+    [Header("Must be in the same order as database!")]
+    public TreatmentRepresentation[] reps;
 
-    public Treatment GetTreatment()
+    TreatmentPack[] packs;
+
+    protected override void Awake()
     {
-        return database.GetRandomTreatment();
+        base.Awake();
+
+        // Make packs
+        packs = new TreatmentPack[database.availableTreatments.Length];
+
+        for(int i=0; i<packs.Length;i++)
+        {
+            packs[i] = new TreatmentPack(database.availableTreatments[i], reps[i]);
+        }
+    }
+
+    public TreatmentPack GetTreatment()
+    {
+        int index = Random.Range(0, packs.Length);
+        return packs[index];
+    }
+
+    public IEnumerator ReEnableObj(GameObject g, float time)
+    {
+        yield return new WaitForSeconds(time);
+        g.SetActive(true);
     }
 }
