@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Patient : MonoBehaviour
@@ -39,6 +40,7 @@ public class Patient : MonoBehaviour
     {
         // Change visuals
         gameObject.SetActive(true);
+        GetComponent<Renderer>().material.color = Random.ColorHSV(0f,1f, .6f,1f, .3f,.7f, 1f,1f);
 
         // Get tasks
         tasks = new Queue<Action>();
@@ -81,6 +83,7 @@ public class Patient : MonoBehaviour
     {
         currentTreatment = treatmentDatabase.GetRandomTreatment();
         dialogueBox.Display(currentTreatment.GetRequestMessage());
+        Instantiate<GameObject>(currentTreatment.snapZonePrefab, transform);
     }
 
     public void ReceiveTreatment()
@@ -96,20 +99,9 @@ public class Patient : MonoBehaviour
         FollowPath();
     }
 
-    public void WanderRandomly()
-    {
-
-    }
-
     public void FollowPath()
     {
         StartCoroutine(RunFollowPath(currentPath));
-    }
-
-    IEnumerator RunWanderRandomly()
-    {
-        // Implement (has original pos and degree of freedom)
-        yield return null;
     }
 
     IEnumerator RunFollowPath(Vector3[] path)
@@ -125,6 +117,17 @@ public class Patient : MonoBehaviour
             yield return null;
         }
         PerformNextTask();
+    }
+
+    public void WanderRandomly()
+    {
+
+    }
+
+    IEnumerator RunWanderRandomly()
+    {
+        // Implement (has original pos and degree of freedom)
+        yield return null;
     }
 
     public void StopRB()

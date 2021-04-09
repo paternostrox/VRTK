@@ -14,19 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableTreatments:
   - id: Vermelho
+    snapZonePrefab: {fileID: 5911255076023375775, guid: b7ee5d1f09b06844285755e88571b007,
+      type: 3}
     requestMessages:
-    - PRECISO DE VERMELHOOOOO
+    - Preciso de vermelho!
     - "ME D\xC1 VERMELHO INFERNO"
     postMessages:
     - AGORA POSSO VERMELHOR HAHAHA
   - id: Verde
+    snapZonePrefab: {fileID: 1805374112581203279, guid: 3f617ad8676583d439c352100b7c5735,
+      type: 3}
     requestMessages:
     - Verdeeeeeee :(
     postMessages:
     - "Valeu irm\xE3o"
   - id: Azul
+    snapZonePrefab: {fileID: 8155959060863364262, guid: 12d31d14556a55245b86b6bb1efe6fc3,
+      type: 3}
     requestMessages:
-    - Quero muito azul
-    - "AZUL, DA COR DE SUA M\xC3E AQUELA BALEIA"
+    - Quero azul, por favor!
+    - AAAAZUL
     postMessages:
     - Obgggg champs ;)

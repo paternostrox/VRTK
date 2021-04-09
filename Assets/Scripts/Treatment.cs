@@ -5,6 +5,8 @@ using UnityEngine;
 public class Treatment
 {
     public string id;
+    public GameObject treatmentObj;
+    public GameObject snapZonePrefab;
     public string[] requestMessages;
     public string[] postMessages;
 

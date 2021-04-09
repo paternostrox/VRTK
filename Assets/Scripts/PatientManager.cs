@@ -21,7 +21,7 @@ public class PatientManager : MonoBehaviour
         else
             throw new System.Exception("There should be only one PatientManager in the scene!");
 
-        StartCoroutine(RunSpawner(2f,12f));
+        StartCoroutine(RunSpawner(8f,30f));
     }
 
     IEnumerator RunSpawner(float minInterval, float maxInterval)
