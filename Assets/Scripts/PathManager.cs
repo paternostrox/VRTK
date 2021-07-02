@@ -72,7 +72,7 @@ public class PathManager : Singleton<PathManager>
 
     public Vector3[] GetPathToExit(int stationIndex)
     {
-        if (stationIndex > 0)
+        if (stationIndex >= 0)
         {
             treatmentStations[stationIndex].isOccupied = false;
             return PPPUtil.Transforms2Positions(treatmentStations[stationIndex].stationToExit.path);

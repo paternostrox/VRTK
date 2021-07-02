@@ -944,6 +944,11 @@ PrefabInstance:
       propertyPath: receiveValidity.field
       value: 
       objectReference: {fileID: 827740737050079287}
+    - target: {fileID: 3370683482093829711, guid: c72a79d4e6496ce4a8d8eff370fb614e,
+        type: 3}
+      propertyPath: grabType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6786077343534509636, guid: c72a79d4e6496ce4a8d8eff370fb614e,
         type: 3}
       propertyPath: m_LocalPosition.x

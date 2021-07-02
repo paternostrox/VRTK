@@ -17,6 +17,9 @@ public class Patient : MonoBehaviour
 
     TreatmentPack treatmentPack;
 
+    [SerializeField]
+    CreatureDatabase database;
+
     Vector3[] currentPath;
 
     Queue<Action> tasks;
@@ -43,7 +46,7 @@ public class Patient : MonoBehaviour
     {
         // Change visuals
         gameObject.SetActive(true);
-        GetComponent<Renderer>().material.color = Random.ColorHSV(0f,1f, .6f,1f, .3f,.7f, 1f,1f);
+        Instantiate(database.GetRandomCreature(), transform);
 
         // Get tasks
         tasks = new Queue<Action>();
