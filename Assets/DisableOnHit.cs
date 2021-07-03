@@ -6,6 +6,7 @@ public class DisableOnHit : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.transform.root.gameObject.SetActive(false);
+        if(other.transform.root.tag == "puta")
+            other.transform.root.gameObject.SetActive(false);
     }
 }
